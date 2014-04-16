@@ -23,7 +23,7 @@ object FIXME {
     } catch {
       case any: Exception => c.abort(c.enclosingPosition, "Expected format: 'yyyy/MM/dd: message'")
     }
-    reify()
+    c.Expr[Any](EmptyTree)
   }
 }
 
