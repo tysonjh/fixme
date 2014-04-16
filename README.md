@@ -1,4 +1,3 @@
-fixme
-=====
+# FIXME macro
 
-Date based compiler warnings for FIXMEs
+Just messing around with some macros. A colleague put me on to a ruby variant of this.
