@@ -1,6 +1,6 @@
 import java.text.SimpleDateFormat
 import java.util.Date
-import scala.reflect.macros.blackbox.Context
+import scala.reflect.macros.Context
 import scala.language.experimental.macros
 
 object FIXME {

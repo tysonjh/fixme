@@ -30,3 +30,13 @@ Will generate a compiler error
 [error] one error found
 [error] (core/compile:compile) Compilation failed
 ```
+
+# Using
+
+In your SBT build settings add,
+
+```scala
+resolvers += "tysonjh releases" at "http://tysonjh.github.io/releases/"
+
+libraryDependencies += "com.tysonjh" %% "fixme" % "0.1"
+```
