@@ -4,7 +4,7 @@ import Keys._
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "com.tysonjh",
-    version := "0.1",
+    version := "0.2-SNAPSHOT",
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation"),
