@@ -1,15 +1,15 @@
 import java.text.SimpleDateFormat
 import java.util.Date
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 import scala.language.experimental.macros
 
 object FIXME {
-  def apply(format: String) = macro fixmeMacro.impl
-  def orDie(format: String) = macro fixmeMacro.implOrDie
+  def apply(format: String): Any = macro fixmeMacro.impl
+  def orDie(format: String): Any = macro fixmeMacro.implOrDie
 }
 
 object TODO {
-  def apply(format: String) = macro fixmeMacro.impl
+  def apply(format: String): Any = macro fixmeMacro.impl
 }
 
 object fixmeMacro  {
@@ -18,7 +18,7 @@ object fixmeMacro  {
 
   def impl(c: Context)(format: c.Expr[String]): c.Expr[Any] = {
     import c.universe._
-    val Literal(Constant(s_format: String)) = format.tree
+    val q"${ s_format: String }" = format.tree
     try {
       val curDate = new Date()
       s_format match {
@@ -30,12 +30,12 @@ object fixmeMacro  {
     } catch {
       case any: Exception => c.abort(c.enclosingPosition, "Expected format: 'yyyy/MM/dd: message'")
     }
-    c.Expr[Any](EmptyTree)
+    c.Expr[Any](q"()")
   }
 
   def implOrDie(c: Context)(format: c.Expr[String]): c.Expr[Any] = {
     import c.universe._
-    val Literal(Constant(s_format: String)) = format.tree
+    val q"${ s_format: String }" = format.tree
     try {
       val curDate = new Date()
       s_format match {
@@ -47,7 +47,7 @@ object fixmeMacro  {
     } catch {
       case any: Exception => c.abort(c.enclosingPosition, "Expected format: 'yyyy/MM/dd: message'")
     }
-    c.Expr[Any](EmptyTree)
+    c.Expr[Any](q"()")
   }
 }
 

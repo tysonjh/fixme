@@ -31,12 +31,14 @@ Will generate a compiler error
 [error] (core/compile:compile) Compilation failed
 ```
 
-# Using
+# Using with SBT
 
 In your SBT build settings add,
 
 ```scala
 resolvers += "tysonjh releases" at "http://tysonjh.github.io/releases/"
 
-libraryDependencies += "com.tysonjh" %% "fixme" % "0.1"
+libraryDependencies += "com.tysonjh" %% "fixme" % "0.1" // Scala 2.10.x (or)
+
+libraryDependencies += "com.tysonjh" %% "fixme" % "1.0" // Scala 2.11.0
 ```
