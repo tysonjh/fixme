@@ -4,11 +4,11 @@ import Keys._
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "com.tysonjh",
-    version := "0.2-SNAPSHOT",
+    version := "1.0",
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation"),
-    scalaVersion := "2.10.4") 
+    scalaVersion := "2.11.0") 
 
   val noPublish = Seq(publishArtifact := false, publish := {}, publishLocal := {})
 }
