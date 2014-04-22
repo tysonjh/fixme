@@ -1,9 +1,12 @@
+@FIXME("2013/04/10: This annotation will abort compilation if not fixed by 2013/04/10") 
 object Test extends App {
+
+  @FIXME("This annotation always generates a warning")
   def hi() {
-    FIXME.orDie("2073/04/10: This will abort compilation if not fixed by 2073/04/10")
+    FIXME("2013/04/10: This expression will abort compilation if not fixed by 2013/04/10")
     println("hi")
   }
 	
-  FIXME("2073/04/10: This will generate a warning if not fixed by 2073/04/10")  
+  FIXME("This expression always generates a warning")  
   hi()
 }
