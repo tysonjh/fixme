@@ -44,7 +44,7 @@ object fixmeMacro  {
       format match {
         case FixmeFormat(date, message) =>
           if(currentDate.after(dateFormat.parse(date))) {
-            c.abort(c.enclosingPosition, s"FIXME.orDie DATE PASSED ($date): $message")
+            c.abort(c.enclosingPosition, s"FIXME DATE PASSED ($date): $message")
           }
         case message => c.warning(c.enclosingPosition, s"FIXME: $message")
       }
