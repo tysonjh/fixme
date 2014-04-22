@@ -4,11 +4,13 @@ import Keys._
 object BuildSettings {
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "com.tysonjh",
-    version := "1.0",
+    version := "1.1",
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation"),
-    scalaVersion := "2.11.0") 
+    scalaVersion := "2.11.0",
+
+      addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)) 
 
   val noPublish = Seq(publishArtifact := false, publish := {}, publishLocal := {})
 }
