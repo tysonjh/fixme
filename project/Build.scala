@@ -2,13 +2,15 @@ import sbt._
 import Keys._
 
 object BuildSettings {
+  val paradiseVersion = "2.0.0"
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "com.tysonjh",
-    version := "0.2-SNAPSHOT",
+    version := "0.2",
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation"),
-    scalaVersion := "2.10.4") 
+    scalaVersion := "2.10.4",
+    addCompilerPlugin("org.scalamacros" % "paradise" % paradiseVersion cross CrossVersion.full)) 
 
   val noPublish = Seq(publishArtifact := false, publish := {}, publishLocal := {})
 }
@@ -29,6 +31,7 @@ object MyBuild extends Build {
     settings = buildSettings ++ Seq(
       name := "fixme",
       libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-reflect" % _),
+      libraryDependencies += "org.scalamacros" %% "quasiquotes" % paradiseVersion,
       initialCommands in console := """
         |import reflect.runtime.universe
         |import universe._
