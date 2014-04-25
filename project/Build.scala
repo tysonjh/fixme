@@ -22,8 +22,8 @@ object MyBuild extends Build {
     "root",
     file("."),
     settings = buildSettings ++ noPublish ++ Seq(
-      run <<= run in Compile in core)
-    ).aggregate(macros, core)
+      run <<= run in Compile in examples)
+    ).aggregate(macros, examples)
 
   lazy val macros: Project = Project(
     "macros",
@@ -47,9 +47,9 @@ object MyBuild extends Build {
     )
   )
 
-  lazy val core: Project = Project(
-    "core",
-    file("core"),
+  lazy val examples: Project = Project(
+    "examples",
+    file("examples"),
     settings = buildSettings ++ noPublish
   ).dependsOn(macros)
 }
