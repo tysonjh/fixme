@@ -8,6 +8,8 @@ There are two ways to use FIXME,
 * as an annotation
 
 ```scala
+import fixme._ // need this import!
+
 FIXME("2013/04/10: This expression will abort compilation if not fixed by 2013/04/10")
 
 FIXME("This expression always generates a warning")
@@ -49,7 +51,7 @@ In your SBT build settings add,
 ```scala
 resolvers += "tysonjh releases" at "http://tysonjh.github.io/releases/"
 
-libraryDependencies += "com.tysonjh" %% "fixme" % "0.3" // Scala 2.10.x (or)
+libraryDependencies += "com.tysonjh" %% "fixme" % "0.4" // Scala 2.10.x (or)
 
-libraryDependencies += "com.tysonjh" %% "fixme" % "1.2" // Scala 2.11.x
+libraryDependencies += "com.tysonjh" %% "fixme" % "1.3" // Scala 2.11.x
 ```
