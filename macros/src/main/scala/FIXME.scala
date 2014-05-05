@@ -1,3 +1,5 @@
+package fixme
+
 import java.text.SimpleDateFormat
 import java.util.Date
 import scala.reflect.macros.whitebox.Context
@@ -10,16 +12,16 @@ object FIXME {
    * Create a FIXME. The format parameter affects behaviour.
    * FIXME("2014/04/10: this should be fixed") - generates a compiler error after the date has passed
    * FIXME("this should be fixed") - generates a compiler warning every compilation
-   * @param format date:message where date is optional. e.g. "2014/04/10: fix me" 
+   * @param format date:message where date is optional. e.g. "2014/04/10: fix me"
    */
   def apply(format: String): Any = macro fixmeMacro.delegateFixme
 }
 
 /**
  * Create a FIXME annotation. The format parameter affects behaviour.
- * @FIXME("2014/04/10: this should be fixed") - generates a compiler error after the date has passed
- * @FIXME("this should be fixed") - generates a compiler warning every compilation
- * @param format date:message where date is optional. e.g. "2014/04/10: fix me" 
+ * - {@literal @}FIXME("2014/04/10: this should be fixed") - generates a compiler error after the date has passed
+ * - {@literal @}FIXME("this should be fixed") - generates a compiler warning every compilation
+ * @param format date:message where date is optional. e.g. "2014/04/10: fix me"
  */
 class FIXME(format: String) extends StaticAnnotation {
   def macroTransform(annottees: Any*): Any = macro fixmeMacro.delegateFixmeAnnot
@@ -71,16 +73,15 @@ object fixmeMacro {
   private[this] def evaluate(c: Context, kind: String, format: String) {
     try {
       format match {
-        case FixmeFormat(date, message) =>
-          if(currentDate.after(dateFormat.parse(date))) {
+        case FixmeFormat(date, message) ⇒
+          if (currentDate.after(dateFormat.parse(date))) {
             c.abort(c.enclosingPosition, s"$kind DATE PASSED ($date): $message")
           }
-        case message => c.warning(c.enclosingPosition, s"$kind: $message")
+        case message ⇒ c.warning(c.enclosingPosition, s"$kind: $message")
       }
     } catch {
-      case any: Exception => c.abort(c.enclosingPosition, "Expected format: 'yyyy/MM/dd: message'")
-    } 
+      case any: Exception ⇒ c.abort(c.enclosingPosition, "Expected format: 'yyyy/MM/dd: message'")
+    }
   }
 }
-
 
