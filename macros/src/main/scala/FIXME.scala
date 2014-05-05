@@ -1,3 +1,5 @@
+package fixme
+
 import java.text.SimpleDateFormat
 import java.util.Date
 import scala.reflect.macros.Context
@@ -20,7 +22,7 @@ class TODO(format: String) extends StaticAnnotation {
   def macroTransform(annottees: Any*): Any = macro fixmeMacro.implAnnot
 }
 
-object fixmeMacro  {
+object fixmeMacro {
   private[this] val dateFormat = new SimpleDateFormat("yyyy/MM/dd")
   private[this] val FixmeFormat = """(\d{4}/\d{2}/\d{2})[\s]*:[\s]*([^\s].+)""".r
   private[this] val currentDate = new Date()
@@ -42,15 +44,15 @@ object fixmeMacro  {
   private[this] def evaluate(c: Context, format: String) {
     try {
       format match {
-        case FixmeFormat(date, message) =>
-          if(currentDate.after(dateFormat.parse(date))) {
+        case FixmeFormat(date, message) ⇒
+          if (currentDate.after(dateFormat.parse(date))) {
             c.abort(c.enclosingPosition, s"FIXME.orDie DATE PASSED ($date): $message")
           }
-        case message => c.warning(c.enclosingPosition, s"FIXME: $message")
+        case message ⇒ c.warning(c.enclosingPosition, s"FIXME: $message")
       }
     } catch {
-      case any: Exception => c.abort(c.enclosingPosition, "Expected format: 'yyyy/MM/dd: message'")
-    } 
+      case any: Exception ⇒ c.abort(c.enclosingPosition, "Expected format: 'yyyy/MM/dd: message'")
+    }
   }
 }
 

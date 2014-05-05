@@ -5,7 +5,7 @@ object BuildSettings {
   val paradiseVersion = "2.0.0"
   val buildSettings = Defaults.defaultSettings ++ Seq(
     organization := "com.tysonjh",
-    version := "0.3",
+    version := "0.4",
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation"),
