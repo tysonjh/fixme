@@ -46,12 +46,37 @@ FIXMEs and TODOs show up often in software projects with a developer's best inte
 
 # Using with SBT
 
+### As a SBT plugin (recommended)
+
+In the your `project/plugins.sbt` add
+
+```scala
+resolvers += "tysonjh releases" at "http://tysonjh.github.io/releases/"
+
+addSbtPlugin("com.tysonjh" % "sbt-fixme" % "1.4")
+```
+
+and in your `build.sbt` add
+
+```scala
+fixmeSettings
+```
+
+### As a dependency
+
 In your SBT build settings add,
 
 ```scala
 resolvers += "tysonjh releases" at "http://tysonjh.github.io/releases/"
 
-libraryDependencies += "com.tysonjh" %% "fixme" % "0.4" // Scala 2.10.x (or)
+libraryDependencies <++= (scalaVersion) { v: String ⇒
+  (if (v.startsWith("2.10")) List("org.scalamacros" %% "quasiquotes" % "2.0.0" % "compile")
+  else Nil) :+
+  "org.scala-lang" % "scala-reflect" % v % "compile" :+
+  "com.tysonjh" %% "fixme" % "1.4" % "compile"
+}
 
-libraryDependencies += "com.tysonjh" %% "fixme" % "1.3" // Scala 2.11.x
+addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
 ```
+
+The above complexity can be reduced if using Scala 2.11.x since `quasiquotes` are part of the standard library. The compiler plugin is required to gain access to macro annotations, it can also be removed if FIXME is to be used as an expression only. _BEWARE_ removing the macro paradise plugin could be confusing since the annotation is still present but not functional!

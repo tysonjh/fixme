@@ -2,8 +2,8 @@ package fixme
 
 import java.text.SimpleDateFormat
 import java.util.Date
-import scala.reflect.macros.whitebox.Context
 import scala.language.experimental.macros
+import scala.reflect.macros.Context
 import scala.annotation.StaticAnnotation
 
 object FIXME {
